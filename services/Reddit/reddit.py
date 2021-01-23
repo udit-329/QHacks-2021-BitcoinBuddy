@@ -33,6 +33,16 @@ vader.lexicon.update({
     'trouble': -5,
     'falls': -4,
     'crashes': -5,
+    'inflationary': -5,
+    'inflation': -5,
+    'launch': 4,
+    'launched':4,
+    'scarcity': -3,
+    'scarce': -3,
+    'fall': -4,
+    'rise': 4,
+    'rising': 4,
+    'falling': -4,
 })
 
 
@@ -49,7 +59,8 @@ def unix_time(time):
 
 def create_json(name):
     top = get_data(name)
-    top_all = {'num_posts': 0,
+    top_all = {'subreddit': str(name),
+        'num_posts': 0,
                'posts': [],
                'sentiment': {'neg': 0, 'neu': 0, 'pos': 0, 'compound': 0}}
 
@@ -66,9 +77,14 @@ def create_json(name):
         top_all['sentiment']['pos'] += pol['pos']
         top_all['sentiment']['compound'] += pol['compound']
 
-    with open(str(name) + '.json', 'w') as outfile:
+    with open('./scraped_data/'+str(name) + '.json', 'w') as outfile:
         json.dump(top_all, outfile)
 
+    return 'Reddit Scraping: Success!'
 
-if __name__ == "__main__":
-    create_json('bitcoin')
+if __name__ == '__main__':
+    name='bitcoin'
+    top = get_data(name)
+    for post in top:
+        print(post.title)
+        print(vader.polarity_scores(post.title))

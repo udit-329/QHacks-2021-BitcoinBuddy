@@ -1,26 +1,40 @@
 from flask import Flask, render_template, request, redirect, Response
-#import reddit
-#import fb_class
+import reddit as red
+import firebase as fb
+import asyncio
 import pandas as pd
 import sys
 
 sys.setrecursionlimit(150000)
 
-
 app = Flask(__name__)
+
+
+async def scrape_reddit(query):
+    return red.create_json(query)
+
+
+async def upload_to_firebase(query):
+    return fb.upload(query)
+
 
 app.config['SECRET_KEY'] = 'bonjour'
 
-#firebase_app = fb_class.fire_base_app()
 
 @app.route('/', methods=['GET'])
 def home():
     return "<h1>Bruh, this aint it</h1>"
 
+
 @app.route('/reddit/<query>', methods=['GET'])
 def page(query):
     q = query
-    return "<h1>"+q+"</h1>"
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    reddit_scraped = loop.run_until_complete(scrape_reddit(q))
+    data_uploaded = loop.run_until_complete(upload_to_firebase(q))
+    return "<h1>" + str(q) + "</h1>"
+
 
 app.run()
 '''
