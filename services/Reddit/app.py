@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = 'bonjour'
 firebase_app = fb_class.fire_base_app()
 
 if __name__ == "__main__":
-    data_table = reddit.create_table(reddit.crypto_currency)
-    data_table = data_table.to_json(index=False)
-    firebase_app.add_data("test", data_table)
+    data_table = reddit.create_table(reddit.bitcoin)
+    data_table.to_csv('out.csv', index=False)
+    #firebase_app.add_data("test", data_table)
 
