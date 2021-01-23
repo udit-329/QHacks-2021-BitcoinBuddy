@@ -1,22 +1,14 @@
 import praw
-import fb_class
 import pandas as pd
 import datetime
 
-reddit = praw.Reddit(client_id='qm1XcqK5n4MNPQ', client_secret='bYTJwaH9ygGnNyOOPGB8QuyF5YBc7g', user_agent='crypto')
-
-#general
-algotrading = reddit.subreddit('algotrading')
-wall_street_bets = reddit.subreddit('wallstreetbets')
-stocks = reddit.subreddit('stocks')
-
+red = praw.Reddit(client_id='qm1XcqK5n4MNPQ', client_secret='bYTJwaH9ygGnNyOOPGB8QuyF5YBc7g', user_agent='crypto')
 #crypto specific
-crypto_currency = reddit.subreddit('CryptoCurrency')
-bitcoin = reddit.subreddit('Bitcoin')
-btc = reddit.subreddit('btc')
-crypto_markets = reddit.subreddit('CryptoMarkets')
-ethtrader = reddit.subreddit('ethtrader')
-binance = reddit.subreddit('binance')
+crypto_currency = red.subreddit('CryptoCurrency')
+altcoins = red.subreddit('altcoins')
+crypto_markets = red.subreddit('CryptoMarkets')
+binance = red.subreddit('binance')
+altcointrader = red.subreddit('AltcoinTrader')
 
 def get_data(sub):
     #Data for 2-3 days
@@ -37,7 +29,8 @@ def create_table(sub):
     hot_all = []
     
     for post in hot:
-        hot_all.append([post.title, post.url, post.score, post.subreddit, post.num_comments, post.selftext, unix_time_convert(post.created)])
+        print(post.title)
+        hot_all.append([post.title, post.url, post.score, post.selftext, unix_time_convert(post.created)])
     
     hot_all = pd.DataFrame(hot_all, columns = ['title', 'url', 'score', 'subreddit', 'num_comments', 'body', 'created'])
     return hot_all
