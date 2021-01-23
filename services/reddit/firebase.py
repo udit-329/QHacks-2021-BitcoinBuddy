@@ -24,3 +24,20 @@ def upload(name):
 
     return 'Firebase Upload: Success!'
 
+
+def upload_news(name):
+    db = firestore.client()
+    doc_ref = db.collection('news')
+
+    data = {}
+    with open('./scraped_data/'+str(name)+'_news.json') as f:
+        data = json.load(f)
+
+    doc_ref.document(name).set({
+        'sentiment': data['sentiment'],
+        'totalResults': data['total_results'],
+        'dataAdded': str(datetime.now()),
+    })
+
+    return 'Firebase Upload: Success!'
+
