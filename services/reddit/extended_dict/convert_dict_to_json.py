@@ -1,0 +1,1 @@
+import pandas as pdimport jsondict = (pd.read_csv("./additional_sentiment.csv")).drop(0).dropna()pos = dict['positive']neg = dict['negative']parsed_dict = {}for word in pos:    parsed_dict[word] = 5for word in neg:    parsed_dict[word] = -5with open('ext_dict.json', 'w+') as outfile:        json.dump(parsed_dict, outfile)

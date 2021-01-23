@@ -55,7 +55,9 @@ def news_page(query):
     asyncio.set_event_loop(loop)
     reddit_scraped = loop.run_until_complete(scrape_news(q))
     data_uploaded = loop.run_until_complete(upload_news_to_firebase(q))
-    return "<h1>" + str(q) + "</h1>"
+    with open('./scraped_data/' + str(q) + '_news.json') as f:
+        data = json.load(f)
+    return jsonify({'query': str(q), 'sentiment': data['sentiment']})
 
 
 app.run()
