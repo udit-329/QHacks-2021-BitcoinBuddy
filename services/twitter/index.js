@@ -2,7 +2,6 @@ var app = require("express")(),
   bodyParser = require("body-parser"),
   twitter = require("twitter-lite"),
   sentiment = require("sentiment"),
-  sntmnt = new sentiment(),
   port = 2001;
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -18,36 +17,36 @@ const twit = new twitter({
 // API Secret Key: JgtnFIxJ3pqLx2g6qQz4imQOrANbj4q6CHoiQTn5ds73ruOTLT
 // Bearer Token: AAAAAAAAAAAAAAAAAAAAAEYgMAEAAAAAwepI9G4%2FbKRz2AV6FGMTL7DTYTE%3DtRpVpFYzKnmEuU4aSQ7Fd8sQwhZ3ns3E36lM5xxziwumA9t0Vk
 
-function sent() {}
-
-(async function () {
-  try {
+// Get Routes
+app.get("/twitter/:id", async (req, res, next) => {
+  var q = req.params.id
+    try {
     let response = await twit.getBearerToken();
     const app = new twitter({
       bearer_token: response.access_token,
     });
 
-    // Search for recent tweets from the twitter API
-    response = await app.get(`/search/tweets`, {
-      q: "Lionel Messi", // The search term
-      lang: "en", // Let's only get English tweets
-      count: 10, // Limit the results to 100 tweets
+     response = await app.get(`/search/tweets`, {
+      q: q, // The search term
+      lang: "en", // Only get english tweets
+      count: 10, // How many tweets
     });
 
-    // Loop over all the tweets and print the text
+    const tweetlist = []
     for (tweet of response.statuses) {
-      console.dir(tweet.text);
+      tweetlist.push({
+        id: tweet.id,
+        created_at: tweet.created_at,
+        text: tweet.text,
+        sentiment: sntmnt(tweet.text)
+      })
     }
+
+    return res.send(tweetlist);
   } catch (e) {
-    console.log("There was an error calling the Twitter API");
+    console.log("Error!");
     console.dir(e);
   }
-})();
-
-// Get Routes
-// Get Routes
-app.get("/twitter/:id", async (req, res, next) {
-  var q = req.params.id
   next();
 });
 
