@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, Response
+from flask import Flask, render_template, request, redirect, Response,jsonify
 import reddit as red
 import firebase as fb
 import asyncio
-import pandas as pd
+import json
 import sys
 
 sys.setrecursionlimit(150000)
@@ -33,7 +33,10 @@ def page(query):
     asyncio.set_event_loop(loop)
     reddit_scraped = loop.run_until_complete(scrape_reddit(q))
     data_uploaded = loop.run_until_complete(upload_to_firebase(q))
-    return "<h1>" + str(q) + "</h1>"
+    data = {}
+    with open('./scraped_data/'+str(q)+'.json') as f:
+        data = json.load(f)
+    return jsonify({'subreddit': data['subreddit'], 'sentiment':data['sentiment']})
 
 
 app.run()
