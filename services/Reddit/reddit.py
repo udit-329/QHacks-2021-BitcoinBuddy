@@ -5,7 +5,6 @@ import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 nltk.download('vader_lexicon')
-
 red = praw.Reddit(client_id='qm1XcqK5n4MNPQ', client_secret='bYTJwaH9ygGnNyOOPGB8QuyF5YBc7g', user_agent='crypto')
 vader = SentimentIntensityAnalyzer()
 vader.lexicon.update({
@@ -72,12 +71,21 @@ def create_json(name):
                                  'score': post.score,
                                  'created_at': unix_time(post.created),
                                  'polarity_scores': pol})
-        top_all['sentiment']['neg'] += pol['neg']
-        top_all['sentiment']['neu'] += pol['neu']
-        top_all['sentiment']['pos'] += pol['pos']
-        top_all['sentiment']['compound'] += pol['compound']
 
-    with open('./scraped_data/'+str(name) + '.json', 'w') as outfile:
+        sent = 0
+        if pol['neg'] > pol['pos']:
+            top_all['sentiment']['neg'] += 1
+        elif pol['pos'] > pol['neg']:
+            sent = 1
+            top_all['sentiment']['pos'] += 1
+        else:
+            sent = 1
+            top_all['sentiment']['neu'] += 1
+
+        top_all['sentiment']['compound'] += sent
+
+    top_all['sentiment']['compound'] /= top_all['num_posts']
+    with open('./scraped_data/' + str(name) + '.json', 'w') as outfile:
         json.dump(top_all, outfile)
 
     return 'Reddit Scraping: Success!'
