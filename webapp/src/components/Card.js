@@ -1,9 +1,12 @@
 import React, { useCallback, useState, useEffect } from "react";
+import Button from 'react-bootstrap/Button';
 const axios = require("axios");
+
+const apikey ='dgi6s9vbnhjlgm7ucw98m';
 const baseURL =
-"https://api.lunarcrush.com/v2/assets?data=assets&key=jda229vuu8m04thfgvqrdn6";
+"https://api.lunarcrush.com/v2/assets?data=assets&key="+apikey;
 const baseURL2 =
-"https://api.lunarcrush.com/v2/assets?data=meta&key=jda229vuu8m04thfgvqrdn6&type=full";
+"https://api.lunarcrush.com/v2/assets?data=meta&key="+apikey+"&type=full";
 
 function Card({ symbol }) {
   const [coinData, setCoinData] = useState({});
@@ -47,6 +50,7 @@ function Card({ symbol }) {
 
   return (
     <div>
+        <Button/>
       {symbol ? (<img src={image} width="50" height="50"></img>) : (<div></div>)}
     </div>
   );
