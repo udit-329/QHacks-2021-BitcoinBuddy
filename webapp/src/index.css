@@ -45,3 +45,9 @@ iframe::after{
 .graphcard{
   width: 59%;
 }
+
+.tipico{
+  width: 6rem;
+  margin-left: 5rem;
+  margin-top: 1rem;
+}

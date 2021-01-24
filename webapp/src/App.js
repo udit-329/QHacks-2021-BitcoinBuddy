@@ -8,8 +8,9 @@ import "./App.css";
 import TopBanner from "./components/TopBanner";
 import CryptoCard from "./components/CryptoCard";
 import CryptoColumn from "./components/CryptoColumn";
+import CryptoColumnTwo from "./components/CryptoColumn2";
 import PiGraph from "./components/PiGraph";
-import CryptoGraph from "./components/CryptoGraph";
+
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <CryptoColumn symbol="BTC" />
         </Row>
         <Row>
+          <CryptoColumnTwo symbol="BTC" />
           <Card className="graphcard">
             <div >
               <iframe
