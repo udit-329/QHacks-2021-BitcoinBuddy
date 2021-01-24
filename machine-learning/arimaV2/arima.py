@@ -6,7 +6,7 @@ from pandas import datetime
 from statsmodels.tsa.arima_model import ARIMA
 from sklearn.metrics import mean_squared_error
 
-df = pd.read_csv("./bitcoin_historical_data.csv.csv")
+df = pd.read_csv("./bitcoin_historical_data.csv")
 df.head(5)
 
 plt.figure()
@@ -15,14 +15,14 @@ plt.title('Predicting the price with ARIMA')
 plt.show()
 
 plt.plot(df["Date"], df["Price"])
-plt.title("TESLA stock price over time")
+plt.title("Bitcoin stock price over time")
 plt.xlabel("Date")
 plt.ylabel("Price")
 plt.show()
 
 train_data, test_data = df[0:int(len(df)*0.7)], df[int(len(df)*0.7):]
-training_data = train_data['Close'].values
-test_data = test_data['Close'].values
+training_data = train_data['Open'].values
+test_data = test_data['Open'].values
 history = [x for x in training_data]
 model_predictions = []
 N_test_observations = len(test_data)
