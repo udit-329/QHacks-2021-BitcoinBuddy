@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import "./App.css";
+
+// Components
+import TopBanner from "./components/TopBanner";
+import CryptoCard from "./components/CryptoCard";
+import CryptoColumn from "./components/CryptoColumn";
+import PiGraph from "./components/PiGraph";
+import CryptoGraph from "./components/CryptoGraph";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TopBanner symbol="BTC" />
+      <Container>
+        <CryptoCard symbol="BTC" />
+        <Row>
+          <PiGraph plat="reddit" coin="bitcoin" />
+          <PiGraph plat="news" coin="bitcoin" />
+        </Row>
+        <CryptoColumn symbol="BTC" />
+      </Container>
     </div>
   );
 }
