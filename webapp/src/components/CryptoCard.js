@@ -1,6 +1,8 @@
 import React, { useCallback, useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import apikey from "../utils/LunarCrush"
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import apikey from "../utils/LunarCrush";
 const axios = require("axios");
 
 const baseURL =
@@ -50,19 +52,19 @@ function CryptoCard({ symbol }) {
   }, [symbol, getCoinData]);
 
   return (
-    <div>
-      {symbol ? (
+      <Row>
         <Card style={{ width: "18rem" }}>
           <Card.Body>
             <img class="cardname-circle" src={image}></img>
-            <div class="cardname-topper" >
+            <div class="cardname-topper">
               <Card.Title>{coinData.name}</Card.Title>
               <Card.Subtitle
                 className={`mb-2 ${
                   coinData.percent_change_24h >= 0
                     ? "text-success"
                     : "text-danger"
-                }`}>
+                }`}
+              >
                 ${parseFloat(coinData.close).toFixed(2)}{" "}
                 {coinData.percent_change_24h >= 0 ? (
                   <i class="fas fa-chevron-up"></i>
@@ -70,13 +72,43 @@ function CryptoCard({ symbol }) {
                   <i class="fas fa-chevron-down"></i>
                 )}
               </Card.Subtitle>
-              </div>
+            </div>
           </Card.Body>
         </Card>
-      ) : (
-        <div></div>
-      )}
-    </div>
+
+        <Card style={{ width: "12rem" }}>
+          <Card.Body>
+            <div class="cardname-topper">
+              <Card.Title>Volume</Card.Title>
+              <Card.Subtitle className="text-primary">
+                {Math.floor(parseFloat(coinData.volume_24h))+" BTC"}
+              </Card.Subtitle>
+            </div>
+          </Card.Body>
+        </Card>
+
+        <Card style={{ width: "12rem" }}>
+          <Card.Body>
+            <div class="cardname-topper">
+              <Card.Title>Market Cap</Card.Title>
+              <Card.Subtitle className="text-primary">
+                ${Math.floor(parseFloat(coinData.market_cap))}
+              </Card.Subtitle>
+            </div>
+          </Card.Body>
+        </Card>
+
+        <Card style={{ width: "12rem" }}>
+          <Card.Body>
+            <div class="cardname-topper">
+              <Card.Title>Sentiment</Card.Title>
+              <Card.Subtitle className="text-danger">
+                {coinData.average_sentiment+"/5 "}<i class="fas fa-chevron-down"></i>
+              </Card.Subtitle>
+            </div>
+          </Card.Body>
+        </Card>
+      </Row>
   );
 }
 

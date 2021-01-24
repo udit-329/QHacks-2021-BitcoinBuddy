@@ -53,20 +53,7 @@ function TopBanner({ symbol }) {
 
   return (
     <Navbar bg="dark" variant="dark">
-      <Nav>
-        <Navbar.Brand href="#home">
-          <img
-            alt=""
-            src={image}
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />
-          {" " + coinData.name}
-        </Navbar.Brand>
-      </Nav>
-      <Nav>
-        {" "}
+      <Navbar.Brand href="#home">
         <img
           alt=""
           src={image}
@@ -75,7 +62,7 @@ function TopBanner({ symbol }) {
           className="d-inline-block align-top"
         />
         {" " + coinData.name}
-      </Nav>
+      </Navbar.Brand>
     </Navbar>
   );
 }
