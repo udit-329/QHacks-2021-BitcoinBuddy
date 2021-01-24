@@ -102,8 +102,8 @@ function CryptoCard({ symbol }) {
           <Card.Body>
             <div class="cardname-topper">
               <Card.Title>Sentiment</Card.Title>
-              <Card.Subtitle className="text-danger">
-                {coinData.average_sentiment+"/5 "}<i class="fas fa-chevron-down"></i>
+              <Card.Subtitle className="text-pri">
+                {coinData.average_sentiment+"/5 "}
               </Card.Subtitle>
             </div>
           </Card.Body>
