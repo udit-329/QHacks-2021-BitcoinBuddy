@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
-import apikey from "../utils/LunarCrush"
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import apikey from "../utils/LunarCrush";
 const axios = require("axios");
 
 const baseURL =
@@ -8,7 +9,7 @@ const baseURL =
 const baseURL2 =
   "https://api.lunarcrush.com/v2/assets?data=meta&key=" + apikey + "&type=full";
 
-function CryptoCard({ symbol }) {
+function TopBanner({ symbol }) {
   const [coinData, setCoinData] = useState({});
   const [image, setImage] = useState("");
   const url = baseURL + "&symbol=" + symbol + "&data_points=1&interval=hour";
@@ -25,6 +26,7 @@ function CryptoCard({ symbol }) {
         delete res.data.timeSeries;
 
         setCoinData(res.data);
+        console.log(res.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -38,7 +40,7 @@ function CryptoCard({ symbol }) {
         res.data = res.data[0];
 
         setImage(res.data.image);
-        console.log(res.data);
+        console.log(res.data.image);
       })
       .catch(function (error) {
         console.log(error);
@@ -50,34 +52,32 @@ function CryptoCard({ symbol }) {
   }, [symbol, getCoinData]);
 
   return (
-    <div>
-      {symbol ? (
-        <Card style={{ width: "18rem" }}>
-          <Card.Body>
-            <img class="cardname-circle" src={image}></img>
-            <div class="cardname-topper" >
-              <Card.Title>{coinData.name}</Card.Title>
-              <Card.Subtitle
-                className={`mb-2 ${
-                  coinData.percent_change_24h >= 0
-                    ? "text-success"
-                    : "text-danger"
-                }`}>
-                ${parseFloat(coinData.close).toFixed(2)}{" "}
-                {coinData.percent_change_24h >= 0 ? (
-                  <i class="fas fa-chevron-up"></i>
-                ) : (
-                  <i class="fas fa-chevron-down"></i>
-                )}
-              </Card.Subtitle>
-              </div>
-          </Card.Body>
-        </Card>
-      ) : (
-        <div></div>
-      )}
-    </div>
+    <Navbar bg="dark" variant="dark">
+      <Nav>
+        <Navbar.Brand href="#home">
+          <img
+            alt=""
+            src={image}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+          />
+          {" " + coinData.name}
+        </Navbar.Brand>
+      </Nav>
+      <Nav>
+        {" "}
+        <img
+          alt=""
+          src={image}
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+        />
+        {" " + coinData.name}
+      </Nav>
+    </Navbar>
   );
 }
 
-export default CryptoCard;
+export default TopBanner;
