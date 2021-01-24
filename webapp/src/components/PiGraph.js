@@ -2,6 +2,7 @@ import React, { useCallback, useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import { PieChart } from "react-minimal-pie-chart";
 import firebase from "../utils/Firebase";
+import ParseData from "../utils/ParseData";
 import "firebase/firestore";
 const firestore = firebase.firestore();
 
@@ -21,8 +22,8 @@ function PiGraph({ plat, coin }) {
       .get()
       .then((doc) => {
         var res = doc.data();
-        res.sentiment.pos *= 1.44;
-        res.sentiment.neg *= 0.69;
+        res.sentiment.pos = ParseData(res.sentiment.pos, "pos");
+        res.sentiment.neg = ParseData(res.sentiment.neg, "neg");
         console.log(res);
 
         setSentData(res);
