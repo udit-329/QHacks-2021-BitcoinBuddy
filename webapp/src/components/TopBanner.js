@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import  Card from "react-bootstrap/Card";
 import apikey from "../utils/LunarCrush";
 const axios = require("axios");
 
@@ -34,6 +35,8 @@ function TopBanner({ symbol }) {
         </svg>
         {"  Bitcoin Buddy"}
       </Navbar.Brand>
+
+
     </Navbar>
   );
 }

@@ -81,7 +81,7 @@ function CryptoCard({ symbol }) {
             <div class="cardname-topper">
               <Card.Title>Volume</Card.Title>
               <Card.Subtitle className="text-primary">
-                {Math.floor(parseFloat(coinData.volume_24h))+" BTC"}
+                {Math.floor(parseFloat(coinData.volume_24h))+" "+symbol}
               </Card.Subtitle>
             </div>
           </Card.Body>

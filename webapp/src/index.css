@@ -51,3 +51,7 @@ iframe::after{
   margin-left: 5rem;
   margin-top: 1rem;
 }
+
+.LinkList{
+  margin-left: auto;
+}
