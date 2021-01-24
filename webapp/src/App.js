@@ -1,6 +1,7 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
+import Card from "react-bootstrap/Card";
 import "./App.css";
 
 // Components
@@ -19,8 +20,25 @@ function App() {
         <Row>
           <PiGraph plat="reddit" coin="bitcoin" />
           <PiGraph plat="news" coin="bitcoin" />
+          <CryptoColumn symbol="BTC" />
         </Row>
-        <CryptoColumn symbol="BTC" />
+        <Row>
+          <Card className="graphcard">
+            <div >
+              <iframe
+                src="https://widget.coinlib.io/widget?type=chart&theme=light&coin_id=859&pref_coin_id=1505"
+                width="100%"
+                height="520px"
+                marginwidth="0"
+                marginheight="0"
+                frameborder="none"
+                border="none"
+                scrolling="no"
+
+              ></iframe>
+            </div>
+          </Card>
+        </Row>
       </Container>
     </div>
   );

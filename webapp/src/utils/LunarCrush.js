@@ -1,2 +1,2 @@
-const apikey = "ekz3mvmx8zwpxqzu4z6e29";
+const apikey = "06gdj1p33bxc6u9azsb58qf";
 export default apikey;
