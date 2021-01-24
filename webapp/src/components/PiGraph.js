@@ -39,7 +39,7 @@ function PiGraph({ plat, coin }) {
       <Card style={{ "min-width": "20rem"}}>
         <Card.Body>
           <Card.Title>
-            {plat==="reddit" ? "Social" : plat.charAt(0).toUpperCase() + plat.slice(1) + ":"}
+            {plat==="reddit" ? "Social:" : plat.charAt(0).toUpperCase() + plat.slice(1) + ":"}
           </Card.Title>
           <PieChart
             lineWidth={30}

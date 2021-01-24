@@ -37,7 +37,11 @@ function CryptoColumnTwo({ symbol }) {
   return (
     <div class="card-column tipp">
       <Card style={{ width: "16rem", height: "33rem" }}>
-        <svg class="tipico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+        <svg
+          class="tipico"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 576 512"
+        >
           <path
             fill="currentColor"
             d="M564 377L412.78 498a64 64 0 0 1-40 14H16a16 16 0 0 1-16-16v-96a16 16 0 0 1 16-16h55.4l46.5-37.71A117.65 117.65 0 0 1 192 320h160a32 32 0 0 1 32 31.94 31.2 31.2 0 0 1-.46 5.46C381 373.1 366.19 384 350.29 384H272a16 16 0 0 0 0 32h118.28a63.64 63.64 0 0 0 40-14l92.4-73.9c12.4-10 30.8-10.7 42.6 0A32 32 0 0 1 564 377z"
@@ -52,6 +56,24 @@ function CryptoColumnTwo({ symbol }) {
         <Card.Body>
           <Card.Title>Our Financial Tip(s)!</Card.Title>
         </Card.Body>
+
+        <ListGroup className="list-group-flush">
+          <ListGroupItem>
+            {symbol} seems to be a{" "}
+            {coinData.percent_change_24h > 0 &&
+            coinData.social_score_calc_24h_percent > 75
+              ? "good"
+              : "poor"}{" "}
+            short term investment!
+          </ListGroupItem>
+          <ListGroupItem>
+            {symbol} seems to be a{" "}
+            {coinData.percent_change_7d < 0 ? "poor" : "good"} long term
+            investment! Maybe wait a{" "}
+            {coinData.percent_change_30d > 0 ? "while" : "month"} before buying!{" "}
+          </ListGroupItem>
+          <ListGroupItem></ListGroupItem>
+        </ListGroup>
       </Card>
     </div>
   );
