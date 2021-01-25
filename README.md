@@ -1,2 +1,2 @@
 # QHacks-2021
-Bitcoin Buddy, Canada's leading crypto data aggregator and AI platform to make your bitcoin and other cryptocurrency investments easier to manage.
+Bitcoin Buddy performs sentiment analysis on scraped data from thousands of news articles, reddit posts, and tweets. Using this data in conjunction with historical price data, Bitcoin Buddy then forecasts price movements for cryptocurrencies.
