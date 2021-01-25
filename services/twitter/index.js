@@ -9,13 +9,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.raw());
 
 const twit = new twitter({
-  consumer_key: "IcQX43azwezwB6cGvhfaPYUiD",
-  consumer_secret: "JgtnFIxJ3pqLx2g6qQz4imQOrANbj4q6CHoiQTn5ds73ruOTLT",
+
 });
 
-//API Key: IcQX43azwezwB6cGvhfaPYUiD
-// API Secret Key: JgtnFIxJ3pqLx2g6qQz4imQOrANbj4q6CHoiQTn5ds73ruOTLT
-// Bearer Token: AAAAAAAAAAAAAAAAAAAAAEYgMAEAAAAAwepI9G4%2FbKRz2AV6FGMTL7DTYTE%3DtRpVpFYzKnmEuU4aSQ7Fd8sQwhZ3ns3E36lM5xxziwumA9t0Vk
+
 
 function analyze(text) {
   return new sentiment().analyze(
